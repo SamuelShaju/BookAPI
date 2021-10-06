@@ -7,6 +7,9 @@ const Book = require("./API/book");
 const Author = require("./API/author");
 const Publication = require("./API/publication");
 
+// MONGO_URI = "mongodb+srv://Leumas:Leumas-1234@cluster0.05dpe.mongodb.net/Project0?retryWrites=true&w=majority";
+
+
 mongoose
     .connect(process.env.MONGO_URI, {
         useNewUrlParser: true,
