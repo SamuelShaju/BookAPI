@@ -1,5 +1,8 @@
 const Router = require("express").Router();
 
+
+const PublicationModel = require("../schema/publication");
+
 //TODO: Student Task
 /*
 Route           /publication/new
@@ -8,7 +11,16 @@ Access          PUBLIC
 Parameters      NONE
 Method          GET
 */
+Router.post("/new", async (req, res) => {
+    try {
+        const { newPub } = req.body;
 
+        await PublicationModel.create(newPub);
+        return res.json({ message: "Publication added to the database" });
+    } catch (error) {
+        return res.json({ error: error.message });
+    }
+});
 
 //TODO: Student Task
 /*
@@ -18,7 +30,7 @@ Access              PUBLIC
 Parameters          id
 Method              DELETE
 */
-Router.delete("/publication/delete/:id", (req, res) => {
+Router.delete("/delete/:id", (req, res) => {
     const { id } = req.params;
 
     const filteredPub = Database.Publication.filter(
@@ -38,7 +50,7 @@ Access              PUBLIC
 Parameters          id, isbn
 Method              DELETE
 */
-Router.delete("/publication/delete/book/:isbn/:id", (req, res) => {
+Router.delete("/delete/book/:isbn/:id", (req, res) => {
     const { isbn, id } = req.params;
 
     Database.Book.forEach((book) => {

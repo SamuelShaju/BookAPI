@@ -7,7 +7,7 @@ const AuthorModel = require("../schema/author");
 // Method   - GET
 // Params   - none
 // Body     - none
-Router.get("/author", async (req, res) => {
+Router.get("/", async (req, res) => {
     const getAllAuthors = await AuthorModel.find();
     return res.json(getAllAuthors);
 });
@@ -17,7 +17,7 @@ Router.get("/author", async (req, res) => {
 // Access PUBLIC
 // Parameters NONE
 // METHOD POST
-Router.post("/author/new", (req, res) => {
+Router.post("/new", (req, res) => {
     const { newAuthor } = req.body;
 
     AuthorModel.create(newAuthor);
@@ -32,9 +32,11 @@ Router.post("/author/new", (req, res) => {
 // Parameters  id
 // Method      Put
 // Params in the req.body are always in string format
-Router.put("/authour/update/:id", async (req, res) => {
+Router.put("/update/:id", async (req, res) => {
+    
+    console.log("here");
     const { name } = req.body.name;
-
+    console.log(name);
     const updateAuth = await AuthorModel.findOneAndUpdate(
         {
             id: req.params.id,
@@ -60,7 +62,7 @@ Access              PUBLIC
 Parameters          id
 Method              DELETE
 */
-Router.delete("/author/delete/:id", (req, res) => {
+Router.delete("/delete/:id", (req, res) => {
     const { id } = req.params;
 
     const filteredAuthors = Database.Author.filter(
