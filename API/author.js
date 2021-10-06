@@ -34,9 +34,7 @@ Router.post("/new", (req, res) => {
 // Params in the req.body are always in string format
 Router.put("/update/:id", async (req, res) => {
     
-    console.log("here");
     const { name } = req.body.name;
-    console.log(name);
     const updateAuth = await AuthorModel.findOneAndUpdate(
         {
             id: req.params.id,
